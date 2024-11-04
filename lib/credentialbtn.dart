@@ -23,7 +23,7 @@ class ReceiveCre extends StatelessWidget {
         title: const Padding(
           padding: EdgeInsets.only(bottom: 10.0),
           child: Text(
-            'Credentials',
+            'Certifications',
             style: TextStyle(
               color: Colors.white,
             ),
@@ -41,7 +41,7 @@ class ReceiveCre extends StatelessWidget {
                 context,
                 const Icon(Icons.verified,
                     size: 50.0, color: Color(0xFF171B63)),
-                'Received Credentials',
+                'Received Certifications',
                 true, // Pass true for received credentials
               ),
               const SizedBox(height: 20.0), // Space between the two containers
@@ -49,7 +49,7 @@ class ReceiveCre extends StatelessWidget {
               _buildCredentialField(
                 context,
                 const Icon(Icons.pending, size: 50.0, color: Color(0xFF171B63)),
-                'Pending Credentials',
+                'Pending Certifications',
                 false, // Pass false for pending credentials
               ),
             ],

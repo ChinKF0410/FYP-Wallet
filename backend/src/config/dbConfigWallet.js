@@ -9,9 +9,9 @@ LIM CHU QING
 const sql = require('mssql');
 
 const dbConfigWallet = {
-    user: 'sa',
-    password: 'System@123',
-    server: '10.123.10.106',
+    user: 'Wallet',
+    password: 'Wallet',
+    server: '127.0.0.1',
     database: 'Wallet',
     options: {
         encrypt: true,

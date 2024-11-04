@@ -7,7 +7,7 @@ LIM CHU QING
 */
 
 const axios = require('axios');
-const acaPyBaseUrl = 'http://172.16.20.26:7011';
+const acaPyBaseUrl = 'http://127.0.0.1:7011';
 
 
 

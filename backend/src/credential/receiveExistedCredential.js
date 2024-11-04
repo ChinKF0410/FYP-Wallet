@@ -40,6 +40,7 @@ async function receiveExistedCredential(req, res) {
                 SELECT CerName, CerEmail, CerType, CerIssuer, CerDescription, CerAcquiredDate, Active
                 FROM Certification
                 WHERE CerEmail = @email
+                order by CerAcquiredDate desc
             `);
 
         // Check if any records were found

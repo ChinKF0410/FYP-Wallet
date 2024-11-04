@@ -9,7 +9,7 @@ LIM CHU QING
 const axios = require('axios');
 const sql = require('mssql');
 const dbConfig = require('../config/dbConfigWallet');
-const acaPyBaseUrl = 'http://172.16.20.26:7011';
+const acaPyBaseUrl = 'http://127.0.0.1:7011';
 
 // Initialize SQL connection pool
 let poolPromise = sql.connect(dbConfig)

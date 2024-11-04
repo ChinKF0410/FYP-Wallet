@@ -43,7 +43,7 @@ class _ViewCVState extends State<ViewCV> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://172.16.20.26:4000/api/showDetails'),
+        Uri.parse('http://127.0.0.1:4000/api/showDetails'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'accountID': accountID}),
       );
@@ -287,8 +287,6 @@ class _ViewCVState extends State<ViewCV> {
 
   // Display certifications information
   Widget _buildCertificationSection(List<dynamic> certifications) {
-
-
     return Column(
       children: certifications.map((cert) {
         return Column(

@@ -59,7 +59,7 @@ class _GenerateQRViewState extends State<GenerateQRView> {
 
       if (user != null) {
         final response = await http.post(
-          Uri.parse('http://172.16.20.26:4000/api/showDetailsQR'),
+          Uri.parse('http://127.0.0.1:4000/api/showDetailsQR'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({'accountID': user.accountID}),
         );

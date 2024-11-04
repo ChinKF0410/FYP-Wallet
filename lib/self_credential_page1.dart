@@ -87,7 +87,7 @@ class _SelfCredentialPage1State extends State<SelfCredentialPage1>
     try {
       final response = await http.get(
         Uri.parse(
-            'http://172.16.20.26:4000/api/getCVProfile?accountID=$accountID'),
+            'http://127.0.0.1:4000/api/getCVProfile?accountID=$accountID'),
       );
       if (!mounted) return;
 

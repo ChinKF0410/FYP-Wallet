@@ -25,7 +25,7 @@ async function receiveOffer(req, res) {
 
         // Fetch all credential offers from the ACA-Py agent (holder's side)
         const recordsResponse = await axios.get(
-            'http://172.16.20.26:7011/issue-credential-2.0/records',
+            'http://127.0.0.1:7011/issue-credential-2.0/records',
             {
                 headers: {
                     Authorization: `Bearer ${jwtToken}`,  // Use the retrieved JWT token
@@ -61,7 +61,7 @@ async function receiveOffer(req, res) {
             const email = attributes.find(attr => attr.name === "email")?.value || "chuqing@gmail.com";
             const phoneNo = attributes.find(attr => attr.name === "phoneNo")?.value || "0194483310";
             const description = attributes.find(attr => attr.name === "description")?.value || "skdjde";
-            const did = attributes.find(attr => attr.name === "did")?.value || "klk";
+            const did = attributes.find(attr => attr.name === "did")?.value || "klk"; //modify did
             const issueDate = attributes.find(attr => attr.name === "issueDate")?.value || "2024-09-27";
 
             return {

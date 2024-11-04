@@ -41,7 +41,7 @@ class _ViewStoredCredentialScreenState
       try {
         devtools.log("Fetching stored credentials... ${user.email}");
         final response = await http.post(
-          Uri.parse('http://172.16.20.26:4000/api/receiveExistedCredential'),
+          Uri.parse('http://127.0.0.1:4000/api/receiveExistedCredential'),
           headers: {
             'Content-Type': 'application/json',
           },
@@ -92,7 +92,7 @@ class _ViewStoredCredentialScreenState
         ),
         centerTitle: true,
         elevation: 0,
-        title: Text('View Stored Credentials',
+        title: Text('View Stored Certifications',
             style: AppWidget.headlineTextFieldStyle()),
       ),
       body: Center(
@@ -103,7 +103,7 @@ class _ViewStoredCredentialScreenState
                 children: [
                   const SizedBox(height: 20),
                   const Text(
-                    'Your Stored Credential Information',
+                    'Your Stored Certifications Information',
                     style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
                   const SizedBox(height: 20),
@@ -125,7 +125,7 @@ class _ViewStoredCredentialScreenState
                                 ),
                               ),
                               child: const Text(
-                                'Fetch Stored Credentials',
+                                'Fetch Stored Certifications',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 15.0),
                               ),

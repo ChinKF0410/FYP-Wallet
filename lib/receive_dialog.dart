@@ -15,8 +15,8 @@ import 'dart:developer' as devtools show log;
 
 // After user login
 Future<void> saveUserEmail(String email) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('userEmail', email);
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setString('userEmail', email);
 }
 
 class ReceiveDialog extends StatefulWidget {
@@ -39,36 +39,40 @@ class _ReceiveDialogState extends State<ReceiveDialog> {
     });
   }
 
-Future<void> _checkForNewCredentials() async {
+  Future<void> _checkForNewCredentials() async {
     final prefs = await SharedPreferences.getInstance();
-    final email = prefs.getString('userEmail'); // Get the email from shared preferences
+    final email =
+        prefs.getString('userEmail'); // Get the email from shared preferences
 
     if (email == null) {
-        devtools.log('User email not found. Please log in again.');
-        return;
+      devtools.log('User email not found. Please log in again.');
+      return;
     }
 
-    final response = await http.get(Uri.parse('http://172.16.20.26:4000/api/receiveCredentials/$email'));
+    final response = await http
+        .get(Uri.parse('http://127.0.0.1:4000/api/receiveCredentials/$email'));
 
     if (response.statusCode == 200) {
-        final Map<String, dynamic> data = json.decode(response.body);
-        if (data['credentialsAvailable'] == true) {
-            _showCertificationDialog(context); // Show the dialog if new credentials are available
-        }
+      final Map<String, dynamic> data = json.decode(response.body);
+      if (data['credentialsAvailable'] == true) {
+        _showCertificationDialog(
+            context); // Show the dialog if new credentials are available
+      }
     } else {
-        // Handle error response if needed
-        devtools.log('Error checking for new credentials: ${response.statusCode}');
+      // Handle error response if needed
+      devtools
+          .log('Error checking for new credentials: ${response.statusCode}');
     }
-}
-
+  }
 
   void _showCertificationDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('New Credential Received'),
-          content: Text('You have received a new credential. Do you want to accept it?'),
+          title: Text('New Certification Received'),
+          content: Text(
+              'You have received a new certification. Do you want to accept it?'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
@@ -100,11 +104,9 @@ Future<void> _checkForNewCredentials() async {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('Credential Wallet')),
-        body: Center(child: Text('Waiting for credentials...')),
+        appBar: AppBar(title: Text('Certification Wallet')),
+        body: Center(child: Text('Waiting for Certification...')),
       ),
     );
   }
 }
-
-

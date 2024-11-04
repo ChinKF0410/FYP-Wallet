@@ -28,7 +28,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
 
 //let sainoforce know the status
   Future<void> sendMessage(String message, credential) async {
-    final url = Uri.parse('http://172.16.20.26:6011/api/UpdateStatus');
+    final url = Uri.parse('http://127.0.0.1:3010/api/UpdateStatus');
     devtools.log("Message Send");
     try {
       final response = await http.post(
@@ -78,7 +78,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
 
         // Step 1: Call getWalletData API
         final walletResponse = await http.post(
-          Uri.parse('http://172.16.20.26:4000/api/getWalletData'),
+          Uri.parse('http://127.0.0.1:4000/api/getWalletData'),
           headers: {
             'Content-Type': 'application/json',
           },
@@ -104,7 +104,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
             devtools.log("Step2: Initiating getAuthToken call...");
 
             final tokenResponse = await http.post(
-              Uri.parse('http://172.16.20.26:4000/api/getAuthToken'),
+              Uri.parse('http://127.0.0.1:4000/api/getAuthToken'),
               headers: {
                 'Content-Type': 'application/json',
               },
@@ -121,7 +121,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
               devtools.log("Step3: Fetching credentials using authToken...");
 
               final credentialsResponse = await http.post(
-                Uri.parse('http://172.16.20.26:4000/api/receiveOffer'),
+                Uri.parse('http://127.0.0.1:4000/api/receiveOffer'),
                 headers: {
                   'Content-Type': 'application/json',
                   'Authorization':
@@ -145,7 +145,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
 
                 setState(() {
                   isLoading = false;
-                  noDataMessage = "No Pending Credentials.";
+                  noDataMessage = "No Pending Certification.";
                 });
                 devtools.log(
                     'Error fetching credentials: ${credentialsResponse.body}');
@@ -224,7 +224,8 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
     // Extract necessary fields for saveCVCertification API
     Map<String, dynamic> credentialData = {
       'accountID': user?.accountID.toString() ?? '0', // The user's account ID
-      'CerName': credential['did'] ?? 'N/A', // The name from the credential
+      'CerName': credential['name'] ??
+          'N/A', // The name from the credential //modify did
       'CerEmail': credential['email'] ?? 'N/A', // The email from the credential
       'CerType': credential['credentialType'] ?? 'N/A', // The credential type
       'CerIssuer': credential['issuerName'] ?? 'N/A', // The issuer name
@@ -240,7 +241,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
       // First API call: storeCredential
       devtools.log("Calling storeCredential API...");
       final storeResponse = await http.post(
-        Uri.parse('http://172.16.20.26:4000/api/storeCredential'),
+        Uri.parse('http://127.0.0.1:4000/api/storeCredential'),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -259,7 +260,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
 
         // Second API call: saveCVCertification
         final saveResponse = await http.post(
-          Uri.parse('http://172.16.20.26:4000/api/saveCVCertification'),
+          Uri.parse('http://127.0.0.1:4000/api/saveCVCertification'),
           headers: {
             'Content-Type': 'application/json',
           },
@@ -361,7 +362,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
 
       // Call the delete API with POST method
       final response = await http.post(
-        Uri.parse('http://172.16.20.26:4000/api/deleteCredential'),
+        Uri.parse('http://127.0.0.1:4000/api/deleteCredential'),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -408,7 +409,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
         ),
         centerTitle: true,
         elevation: 0,
-        title: Text('Pending Credentials',
+        title: Text('Pending Certification',
             style: AppWidget.headlineTextFieldStyle()),
       ),
       body: Center(
@@ -419,7 +420,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                 children: [
                   const SizedBox(height: 20),
                   const Text(
-                    'Your Credential Information',
+                    'Your Certification Information',
                     style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
                   const SizedBox(height: 20),
@@ -441,7 +442,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                                 ),
                               ),
                               child: const Text(
-                                'Fetch Credentials',
+                                'Fetch Certification',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 15.0),
                               ),
@@ -467,7 +468,7 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
                                           ElevatedButton(
                                             onPressed: () {
                                               devtools.log(
-                                                  'Received credential: ${credential['cred_ex_id']}');
+                                                  'Received Certificatiom: ${credential['cred_ex_id']}');
                                               storeCredential(
                                                   credential); // Pass the entire credential object
                                               sendMessage("Credential Accepted",

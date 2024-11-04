@@ -33,7 +33,8 @@ async function UpdateActive(req, res) {
         }
 
         const pool = await poolPromise;
-
+        console.log(credential_type);
+        console.log(name);
         // Query to update `IsPublic` and `Active` to 0 for the matching record
         const result = await pool.request()
             .input('issuance_date', sql.DateTime, issuance_date)
@@ -55,7 +56,7 @@ async function UpdateActive(req, res) {
                 AND CerType = @credential_type
                 AND CerAcquiredDate = @issuance_date;
             `);
-
+      
         // Check if exactly one row was affected
         if (result.rowsAffected[0] === 1) {
             console.log("Successfully updated 1 record.");
@@ -69,7 +70,7 @@ async function UpdateActive(req, res) {
 
             // Send the updated data to the backend
             await axios.post(
-                `http://172.16.20.26:3010/api/deleteCVCertification`,
+                `http://127.0.0.1:3010/api/deleteCVCertification`,
                 {
                     accountID: AccountID,
                     CerID: CerID,

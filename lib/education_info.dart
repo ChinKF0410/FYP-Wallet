@@ -13,7 +13,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer' as devtools show log;
 
-
 class AppWidget {
   static TextStyle headlineTextFieldStyle() {
     return const TextStyle(
@@ -133,7 +132,7 @@ class _EducationInfoPageState extends State<EducationInfoPage> {
     try {
       final response = await http.get(
         Uri.parse(
-            'http://172.16.20.26:4000/api/getCVEducation?accountID=$accountID'),
+            'http://127.0.0.1:4000/api/getCVEducation?accountID=$accountID'),
       );
       if (!mounted) return;
       if (response.statusCode == 200) {
@@ -375,7 +374,7 @@ class _EducationInfoPageState extends State<EducationInfoPage> {
     try {
       // Make the request to save education entries
       final response = await http.post(
-        Uri.parse('http://172.16.20.26:4000/api/saveCVEducation'),
+        Uri.parse('http://127.0.0.1:4000/api/saveCVEducation'),
         headers: {'Content-Type': 'application/json'},
         body: body,
       );
@@ -422,12 +421,12 @@ class _EducationInfoPageState extends State<EducationInfoPage> {
     if (eduBacID != null) {
       try {
         final response = await http.post(
-          Uri.parse('http://172.16.20.26:4000/api/deleteCVEducation'),
+          Uri.parse('http://127.0.0.1:4000/api/deleteCVEducation'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({'EduBacID': eduBacID}),
         );
         final response2 = await http.post(
-          Uri.parse('http://172.16.20.26:6011/api/deleteCVEducation'),
+          Uri.parse('http://127.0.0.1:6011/api/deleteCVEducation'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({'EduBacID': eduBacID}),
         );
